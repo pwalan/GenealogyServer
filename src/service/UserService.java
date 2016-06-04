@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.MemberDao;
 import dao.UserDao;
+import domain.Member;
 import domain.User;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -32,7 +33,7 @@ public class UserService {
 	 * @param passwd
 	 * @return
 	 */
-	public User Login(String username, String passwd){
+	public User login(String username, String passwd){
 		List<User> userlist=userDao.queryByUserName(username);
 		User user=new User();
 		if(userlist==null){
@@ -53,7 +54,7 @@ public class UserService {
 	 * @param head
 	 * @return
 	 */
-	public boolean Register(String username, String passwd, String head){
+	public boolean register(String username, String passwd, String head){
 		List<User> userlist=userDao.queryByUserName(username);
 		if(userlist.size()>0){
 			return false;
@@ -63,4 +64,44 @@ public class UserService {
 		}
 	}
 	
+	/**
+	 * 添加成员
+	 * @param name
+	 * @param birthday
+	 * @param gender
+	 * @param partner
+	 * @param father
+	 * @param mother
+	 * @param uid
+	 * @return
+	 */
+	public String addMember(String name, String birthday,String gender, String partner, String father, String mother,int uid){
+		Member member=new Member(name, birthday, gender,partner,father,mother,uid);
+		memberDao.save(member);
+		return "add";
+	}
+	
+	/**
+	 * 获取成员
+	 * @param uid
+	 * @return
+	 */
+	public String getMembers(int uid){
+		List<Member> mlist=memberDao.queryByRid(uid);
+		JSONArray ja=new JSONArray();
+		for(int i=0; i<mlist.size();i++){
+			JSONObject jo = new JSONObject();
+			Member m=mlist.get(i);
+			jo.put("id", m.getId());
+			jo.put("name", m.getName());
+			jo.put("birthday", m.getBirthday());
+			jo.put("gender", m.getGender());
+			jo.put("partner", m.getPartner());
+			jo.put("father", m.getFather());
+			jo.put("mother", m.getMother());
+			
+			ja.add(jo);
+		}
+		return ja.toString();
+	}
 }

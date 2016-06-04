@@ -19,6 +19,13 @@ public class UserAction extends ActionSupport{
 	private String status;
 	private String data;
 	
+	private String name;
+	private String birthday;
+	private String gender;
+	private String father;
+	private String mother;
+	private String partner;
+	
 	private UserService userService;
 	
 	public void setUserService(UserService userService) {
@@ -72,6 +79,54 @@ public class UserAction extends ActionSupport{
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getFather() {
+		return father;
+	}
+
+	public void setFather(String father) {
+		this.father = father;
+	}
+
+	public String getMother() {
+		return mother;
+	}
+
+	public void setMother(String mother) {
+		this.mother = mother;
+	}
+
+	public String getPartner() {
+		return partner;
+	}
+
+	public void setPartner(String partner) {
+		this.partner = partner;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
 	/**
 	 * 登录
@@ -86,7 +141,7 @@ public class UserAction extends ActionSupport{
 			setUid(0);
 			setHead("");
 		}else{
-			User user=userService.Login(username, passwd);
+			User user=userService.login(username, passwd);
 			if(user==null){
 				setStatus("faild");
 				setUid(0);
@@ -112,7 +167,7 @@ public class UserAction extends ActionSupport{
 		if(username==null||passwd==null){
 			setStatus("failed");
 		}else{
-			if(userService.Register(username, passwd, head)){
+			if(userService.register(username, passwd, head)){
 				setStatus("succeed");
 			}else{
 				setStatus("failed");
@@ -120,4 +175,21 @@ public class UserAction extends ActionSupport{
 		}	
 		return SUCCESS;
 	}
+	
+	/**
+	 * 添加成员
+	 */
+	public String addMember(){
+		setData(userService.addMember(getName(), getBirthday(), getGender(), getPartner(), getFather(), getMother(), getUid()));
+		return SUCCESS;
+	}
+	
+	/**
+	 * 获取成员
+	 */
+	public String getMembers(){
+		setData(userService.getMembers(getUid()));
+		return SUCCESS;
+	}
+	
 }

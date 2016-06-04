@@ -17,6 +17,10 @@ public class MemberDao extends HibernateDaoSupport{
 				.find("from Member m where m.uid=?",uid);
 	}
 	
+	public Member get(int id){
+		return getHibernateTemplate().get(Member.class, id);
+	}
+	
 	public Integer save(Member member) {
 		return (Integer)getHibernateTemplate().save(member);
 	}

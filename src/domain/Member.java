@@ -4,20 +4,23 @@ public class Member {
     private String name;
     private String birthday;
     private String gender;
-    private int partner;
-    private int father;
-    private int mother;
+    private String partner;
+    private String father;
+    private String mother;
     private int uid;
     
 	public Member() {
 		super();
 	}
 
-	public Member(String name, String birthday, String gender, int uid) {
+	public Member(String name, String birthday, String gender, String partner, String father, String mother, int uid) {
 		super();
 		this.name = name;
 		this.birthday = birthday;
 		this.gender = gender;
+		this.partner = partner;
+		this.father = father;
+		this.mother = mother;
 		this.uid = uid;
 	}
 
@@ -53,27 +56,27 @@ public class Member {
 		this.gender = gender;
 	}
 
-	public int getPartner() {
+	public String getPartner() {
 		return partner;
 	}
 
-	public void setPartner(int partner) {
+	public void setPartner(String partner) {
 		this.partner = partner;
 	}
 
-	public int getFather() {
+	public String getFather() {
 		return father;
 	}
 
-	public void setFather(int father) {
+	public void setFather(String father) {
 		this.father = father;
 	}
 
-	public int getMother() {
+	public String getMother() {
 		return mother;
 	}
 
-	public void setMother(int mother) {
+	public void setMother(String mother) {
 		this.mother = mother;
 	}
 
