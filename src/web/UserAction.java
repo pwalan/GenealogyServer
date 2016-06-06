@@ -185,10 +185,18 @@ public class UserAction extends ActionSupport{
 	}
 	
 	/**
-	 * 获取成员
+	 * 获取成员列表
 	 */
-	public String getMembers(){
-		setData(userService.getMembers(getUid()));
+	public String getMemberlist(){
+		setData(userService.getMemberlist(getUid()));
+		return SUCCESS;
+	}
+	
+	/**
+	 * 获取成员详情
+	 */
+	public String getMember(){
+		setData(userService.getMember(getId()));
 		return SUCCESS;
 	}
 	

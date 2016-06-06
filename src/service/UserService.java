@@ -82,11 +82,11 @@ public class UserService {
 	}
 	
 	/**
-	 * 获取成员
+	 * 获取成员列表
 	 * @param uid
 	 * @return
 	 */
-	public String getMembers(int uid){
+	public String getMemberlist(int uid){
 		List<Member> mlist=memberDao.queryByUid(uid);
 		JSONArray ja=new JSONArray();
 		for(int i=0; i<mlist.size();i++){
@@ -94,15 +94,27 @@ public class UserService {
 			Member m=mlist.get(i);
 			jo.put("id", m.getId());
 			jo.put("name", m.getName());
-			jo.put("birthday", m.getBirthday());
-			jo.put("gender", m.getGender());
-			jo.put("partner", m.getPartner());
-			jo.put("father", m.getFather());
-			jo.put("mother", m.getMother());
+			jo.put("age", Time.getAge(m.getBirthday()));
 			
 			ja.add(jo);
 		}
 		return ja.toString();
+	}
+	
+	/**
+	 * 获取成员详情
+	 */
+	public String getMember(int id){
+		Member m=memberDao.get(id);
+		JSONObject jo = new JSONObject();
+		jo.put("id", m.getId());
+		jo.put("name", m.getName());
+		jo.put("birthday", m.getBirthday());
+		jo.put("gender", m.getGender());
+		jo.put("partner", m.getPartner());
+		jo.put("father", m.getFather());
+		jo.put("mother", m.getMother());
+		return jo.toString();
 	}
 	
 	/**
