@@ -87,7 +87,7 @@ public class UserService {
 	 * @return
 	 */
 	public String getMembers(int uid){
-		List<Member> mlist=memberDao.queryByRid(uid);
+		List<Member> mlist=memberDao.queryByUid(uid);
 		JSONArray ja=new JSONArray();
 		for(int i=0; i<mlist.size();i++){
 			JSONObject jo = new JSONObject();
@@ -104,4 +104,48 @@ public class UserService {
 		}
 		return ja.toString();
 	}
+	
+	/**
+	 * 更新成员信息
+	 * @param name
+	 * @param birthday
+	 * @param gender
+	 * @param partner
+	 * @param father
+	 * @param mother
+	 * @param uid
+	 * @return
+	 */
+	 public String updateMember(String name, String birthday,String gender, String partner, String father, String mother,int uid){
+		 List<Member> mlist=memberDao.queryByUidAndName(uid, name);
+		 Member m=new Member();
+		 if(mlist.size()>0){
+			 m=mlist.get(0);
+			 m.setBirthday(birthday);
+			 m.setGender(gender);
+			 m.setPartner(partner);
+			 m.setFather(father);
+			 m.setMother(mother);
+			 memberDao.update(m);
+			 return "updated";
+		 }
+		 return "failed";
+	 }
+	 
+	 /**
+	  * 删除成员
+	  * @param uid
+	  * @param name
+	  * @return
+	  */
+	 public String deleteMember(int uid, String name){
+		 List<Member> mlist=memberDao.queryByUidAndName(uid, name);
+		 Member m=new Member();
+		 if(mlist.size()>0){
+			 m=mlist.get(0);
+			 memberDao.delete(m);
+			 return "deleted";
+		 }
+		 return "failed";
+	 }
 }

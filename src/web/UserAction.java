@@ -192,4 +192,20 @@ public class UserAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	/**
+	 * 更新成员
+	 */
+	public String updateMember(){
+		setData(userService.updateMember(getName(), getBirthday(), getGender(), getPartner(), getFather(), getMother(), getUid()));
+		return SUCCESS;
+	}
+	
+	/**
+	 * 删除成员
+	 * @return
+	 */
+	public String deleteMember(){
+		setData(userService.deleteMember(getUid(), getName()));
+		return SUCCESS;
+	}
 }

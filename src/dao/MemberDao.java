@@ -12,9 +12,14 @@ import domain.Member;
  */
 public class MemberDao extends HibernateDaoSupport{
 	
-	public List<Member> queryByRid(int uid){
+	public List<Member> queryByUid(int uid){
 		return (List<Member>)getHibernateTemplate()
-				.find("from Member m where m.uid=?",uid);
+				.find("from Member m where m.uid=? order by m.birthday",uid);
+	}
+	
+	public List<Member> queryByUidAndName(int uid, String name){
+		return (List<Member>)getHibernateTemplate()
+				.find("from Member m where m.uid="+uid+" and m.name='"+name+"'");
 	}
 	
 	public Member get(int id){
