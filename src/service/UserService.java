@@ -160,4 +160,28 @@ public class UserService {
 		 }
 		 return "failed";
 	 }
+	 
+	 /**
+	  * 获取用户添加的所有成员详情
+	  * @param uid
+	  * @return
+	  */
+	 public String getUserMembers(int uid){
+		 List<Member> mlist=memberDao.queryByUid(uid);
+			JSONArray ja=new JSONArray();
+			for(int i=0; i<mlist.size();i++){
+				JSONObject jo = new JSONObject();
+				Member m=mlist.get(i);
+				jo.put("id", m.getId());
+				jo.put("name", m.getName());
+				jo.put("birthday", m.getBirthday());
+				jo.put("gender", m.getGender());
+				jo.put("partner", m.getPartner());
+				jo.put("father", m.getFather());
+				jo.put("mother", m.getMother());
+				
+				ja.add(jo);
+			}
+			return ja.toString();
+	 }
 }

@@ -216,4 +216,13 @@ public class UserAction extends ActionSupport{
 		setData(userService.deleteMember(getUid(), getName()));
 		return SUCCESS;
 	}
+	
+	/**
+	 * 获取用户添加的所有成员信息
+	 * @return
+	 */
+	public String getUserMembers(){
+		setData(userService.getUserMembers(getUid()));
+		return SUCCESS;
+	}
 }
