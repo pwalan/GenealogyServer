@@ -22,6 +22,11 @@ public class UserDao extends HibernateDaoSupport{
 				.find("from User u where u.uid=?", uid);
 	}
 	
+	public List<User> queryPublish(){
+		return (List<User>)getHibernateTemplate()
+				.find("from User u where u.isPublish='1'");
+	}
+	
 	public User get(int uid){
 		return getHibernateTemplate().get(User.class, uid);
 	}

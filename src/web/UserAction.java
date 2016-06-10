@@ -225,4 +225,22 @@ public class UserAction extends ActionSupport{
 		setData(userService.getUserMembers(getUid()));
 		return SUCCESS;
 	}
+	
+	/**
+	 * 更新是否公开家谱
+	 * @return
+	 */
+	public String updatePublish(){
+		setData(userService.updatePublish(getUid()));
+		return SUCCESS;
+	}
+	
+	/**
+	 * 获取公开家谱的用户列表
+	 * @return
+	 */
+	public String getPublishList(){
+		setData(userService.getPublishList());
+		return SUCCESS;
+	}
 }
